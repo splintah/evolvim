@@ -1,0 +1,19 @@
+[package]
+name = "evolvim-web"
+version = "0.1.0"
+authors = ["Splinter Suidman (splintah)"]
+edition = "2018"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+evolvim-lib = { path = "../evolvim-lib" }
+# Allocator for wasm with small binary size.
+wee_alloc = { version = "0.4.2", optional = true }
+
+[profile.release]
+# Small code size.
+opt-level = "s"

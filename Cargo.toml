@@ -1,2 +1,7 @@
 [workspace]
 members = ["evolvim-lib", "evolvim-tools"]
+# TODO: when including it in the workspace, an error occurs while
+# compiling wasm-bindgen-macro-support:
+#   error: cannot find macro `quote!` in this scope
+#   917 path: syn::parse_quote! { wasm_bindgen::prelude::__wasm_bindgen_class_marker },
+exclude = ["evolvim-web"]
