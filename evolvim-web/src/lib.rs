@@ -8,8 +8,6 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
 extern {
-    fn alert(s: &str);
-
     #[wasm_bindgen(js_namespace = console)]
     fn log(s: &str);
 }
@@ -22,7 +20,6 @@ pub struct Universe {
 #[wasm_bindgen]
 impl Universe {
     pub fn new() -> Self {
-        log("New universe!");
         Universe { board: Board::default() }
     }
 
@@ -49,9 +46,4 @@ impl Universe {
     pub fn count_creatures(&self) -> usize {
         self.board.creatures.len()
     }
-}
-
-#[wasm_bindgen]
-pub fn greet(name: &str) {
-    log(&format!("Hello, {}!", name));
 }

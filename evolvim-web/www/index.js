@@ -1,4 +1,4 @@
-import { Universe, greet } from "evolvim-web";
+import { Universe } from "evolvim-web";
 
 const info = document.getElementById("evolvim-info");
 const universe = Universe.new();
