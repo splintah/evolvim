@@ -32,7 +32,7 @@ impl Universe {
     }
 
     pub fn update(&mut self) {
-        self.board.update(10.0);
+        self.board.update(0.001);
     }
 
     pub fn season(&self) -> String {
@@ -45,5 +45,21 @@ impl Universe {
 
     pub fn count_creatures(&self) -> usize {
         self.board.creatures.len()
+    }
+
+    pub fn tile_colour_hue(&self, x: usize, y: usize) -> f32 {
+        self.board.terrain.get_tile_at((x, y)).get_hsba_color()[0]
+    }
+
+    pub fn tile_colour_saturation(&self, x: usize, y: usize) -> f32 {
+        self.board.terrain.get_tile_at((x, y)).get_hsba_color()[1]
+    }
+
+    pub fn tile_colour_brightness(&self, x: usize, y: usize) -> f32 {
+        self.board.terrain.get_tile_at((x, y)).get_hsba_color()[2]
+    }
+
+    pub fn tile_colour_alpha(&self, x: usize, y: usize) -> f32 {
+        self.board.terrain.get_tile_at((x, y)).get_hsba_color()[3]
     }
 }
