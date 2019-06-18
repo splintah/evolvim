@@ -4,8 +4,8 @@ import { memory } from "evolvim-web/evolvim_web_bg"
 const info = document.getElementById("evolvim-info");
 const canvas = document.getElementById("evolvim-canvas");
 const ctx = canvas.getContext("2d");
-var universe = Universe.new();
-const TILE_WIDTH = 10;
+let universe = Universe.new();
+const TILE_WIDTH = 20;
 const width = universe.width();
 const height = universe.height();
 console.log(universe.width(), universe.height());
@@ -30,7 +30,21 @@ const drawTiles = () => {
                 TILE_WIDTH,
                 TILE_WIDTH
             );
+
         }
+    }
+
+    for (let i = 0, count = universe.count_creatures(); i < count; ++i) {
+        const x = universe.creature_px(i);
+        const y = universe.creature_py(i);
+        const radius = universe.creature_radius(i);
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(
+            x * TILE_WIDTH,
+            y * TILE_WIDTH,
+            3 * radius * TILE_WIDTH,
+            3 * radius * TILE_WIDTH
+        );
     }
 
     ctx.stroke();
@@ -51,20 +65,20 @@ creatures: ${universe.count_creatures()}
 
 renderLoop();
 
-document.getElementById('file-loader').addEventListener("change", readFromFile);
+const readFromFile = event => {
+    let input = event.target;
 
-function readFromFile(event) {
-    var input = event.target;
-    
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.onload = function(){
-        var arrayBuffer = reader.result;
-        var byteview = new Uint8Array(arrayBuffer);
-        
+        let arrayBuffer = reader.result;
+        let byteview = new Uint8Array(arrayBuffer);
+
         universe = Universe.from_bytes(byteview);
         console.log("Loaded the file!")
     };
-    
+
     console.log("Loading file...");
     reader.readAsArrayBuffer(input.files[0]);
 }
+
+document.getElementById('file-loader').addEventListener("change", readFromFile);

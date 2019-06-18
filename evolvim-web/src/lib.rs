@@ -25,7 +25,7 @@ impl Universe {
 
     pub fn from_bytes(bytes: &[u8]) -> Self {
         let board = Board::<Brain>::load_from_bytes(bytes).unwrap();
-        
+
         Universe { board }
     }
 
@@ -67,5 +67,17 @@ impl Universe {
 
     pub fn tile_colour_alpha(&self, x: usize, y: usize) -> f32 {
         self.board.terrain.get_tile_at((x, y)).get_hsba_color()[3]
+    }
+
+    pub fn creature_px(&self, idx: usize) -> f64 {
+        self.board.creatures[idx].borrow().get_px()
+    }
+
+    pub fn creature_py(&self, idx: usize) -> f64 {
+        self.board.creatures[idx].borrow().get_py()
+    }
+
+    pub fn creature_radius(&self, idx: usize) -> f64 {
+        self.board.creatures[idx].borrow().get_radius()
     }
 }
