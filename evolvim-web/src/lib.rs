@@ -23,6 +23,12 @@ impl Universe {
         Universe { board: Board::default() }
     }
 
+    pub fn from_bytes(bytes: &[u8]) -> Self {
+        let board = Board::<Brain>::load_from_bytes(bytes).unwrap();
+        
+        Universe { board }
+    }
+
     pub fn width(&self) -> usize {
         self.board.get_board_width()
     }

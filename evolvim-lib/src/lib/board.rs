@@ -456,6 +456,13 @@ impl<B: NeuralNet + serde::de::DeserializeOwned> Board<B> {
             ir.into()
         })
     }
+
+    pub fn load_from_bytes(bytes: &[u8]) -> Result<Board<B>, Box<std::error::Error>> {
+        use crate::serde_structs::board::BoardSerde;
+        let ir: BoardSerde<B> = bincode::deserialize(bytes)?;
+
+        Ok(ir.into())
+    }
 }
 
 impl<B: NeuralNet + serde::Serialize> Board<B> {

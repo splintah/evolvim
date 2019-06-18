@@ -4,7 +4,7 @@ import { memory } from "evolvim-web/evolvim_web_bg"
 const info = document.getElementById("evolvim-info");
 const canvas = document.getElementById("evolvim-canvas");
 const ctx = canvas.getContext("2d");
-const universe = Universe.new();
+var universe = Universe.new();
 const TILE_WIDTH = 10;
 const width = universe.width();
 const height = universe.height();
@@ -50,3 +50,21 @@ creatures: ${universe.count_creatures()}
 }
 
 renderLoop();
+
+document.getElementById('file-loader').addEventListener("change", readFromFile);
+
+function readFromFile(event) {
+    var input = event.target;
+    
+    var reader = new FileReader();
+    reader.onload = function(){
+        var arrayBuffer = reader.result;
+        var byteview = new Uint8Array(arrayBuffer);
+        
+        universe = Universe.from_bytes(byteview);
+        console.log("Loaded the file!")
+    };
+    
+    console.log("Loading file...");
+    reader.readAsArrayBuffer(input.files[0]);
+}
