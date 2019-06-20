@@ -101,4 +101,4 @@ const readFromUrl = url => {
 }
 
 document.getElementById('file-loader').addEventListener("change", readFromFile);
-document.getElementById('default-file-loader').addEventListener("click", function() {readFromUrl("test.bin");});
+document.getElementById('default-file-loader').addEventListener("click", () => readFromUrl("test.bin"));
