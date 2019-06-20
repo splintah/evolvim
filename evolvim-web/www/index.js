@@ -82,4 +82,23 @@ const readFromFile = event => {
     reader.readAsArrayBuffer(input.files[0]);
 }
 
+const readFromUrl = url => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.responseType = "arraybuffer";
+
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+            let arrayBuffer = xhttp.response;
+            let byteview = new Uint8Array(arrayBuffer);
+
+            universe = Universe.from_bytes(byteview);
+        }
+    };
+
+    xhttp.open("GET", url, true);
+    xhttp.send();
+}
+
 document.getElementById('file-loader').addEventListener("change", readFromFile);
+document.getElementById('default-file-loader').addEventListener("click", function() {readFromUrl("test.bin");});
