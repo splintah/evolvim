@@ -28,6 +28,10 @@ impl Universe {
 
         Universe { board }
     }
+    
+    pub fn prepare_for_drawing(&mut self) {
+        self.board.prepare_for_drawing();
+    }
 
     pub fn width(&self) -> usize {
         self.board.get_board_width()

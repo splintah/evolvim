@@ -52,6 +52,7 @@ const drawTiles = () => {
 
 const renderLoop = () => {
     universe.update();
+    universe.prepare_for_drawing();
     info.textContent =
 `time: ${universe.time()}
 season: ${universe.season()}
